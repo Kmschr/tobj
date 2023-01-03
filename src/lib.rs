@@ -864,11 +864,12 @@ fn add_vertex(
             }
             if !v_color.is_empty() {
                 if v * 3 + 2 >= v_color.len() {
-                    return Err(LoadError::FaceColorOutOfBounds);
+                    //return Err(LoadError::FaceColorOutOfBounds);
+                } else {
+                    mesh.vertex_color.push(v_color[v * 3]);
+                    mesh.vertex_color.push(v_color[v * 3 + 1]);
+                    mesh.vertex_color.push(v_color[v * 3 + 2]);
                 }
-                mesh.vertex_color.push(v_color[v * 3]);
-                mesh.vertex_color.push(v_color[v * 3 + 1]);
-                mesh.vertex_color.push(v_color[v * 3 + 2]);
             }
             let next = index_map.len() as u32;
             mesh.indices.push(next);
@@ -1015,12 +1016,12 @@ fn add_vertex_multi_index(
                 let vertex = vert.v as usize;
 
                 if vertex * 3 + 2 >= v_color.len() {
-                    return Err(LoadError::FaceColorOutOfBounds);
+                    // return Err(LoadError::FaceColorOutOfBounds);
+                } else {
+                    mesh.vertex_color.push(v_color[vertex * 3]);
+                    mesh.vertex_color.push(v_color[vertex * 3 + 1]);
+                    mesh.vertex_color.push(v_color[vertex * 3 + 2]);
                 }
-
-                mesh.vertex_color.push(v_color[vertex * 3]);
-                mesh.vertex_color.push(v_color[vertex * 3 + 1]);
-                mesh.vertex_color.push(v_color[vertex * 3 + 2]);
             }
         }
     }
